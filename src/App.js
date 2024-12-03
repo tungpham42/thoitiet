@@ -19,7 +19,7 @@ const App = () => {
 
     try {
       const API_KEY = "a1bec79d6102a5ab6f0fea4d6deb5696"; // Replace with your OpenWeather API key
-      const url = `http://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&lang=vi&units=metric&appid=${API_KEY}`;
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&lang=vi&units=metric&appid=${API_KEY}`;
       const response = await axios.get(url);
       setWeather(response.data);
     } catch (error) {
