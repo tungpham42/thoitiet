@@ -32,6 +32,16 @@ const WeatherDisplay = ({ weather }) => {
     return formatter.format(date);
   };
 
+  const msToKmh = (speedInMs) => {
+    let speedInKmh = speedInMs * 3.6;
+    return Math.round(speedInKmh * 10) / 10; // Rounds to 1 decimal place
+  };
+
+  const mToKm = (meters) => {
+    let lengthInKm = Math.round((meters / 1000) * 10) / 10;
+    return lengthInKm;
+  };
+
   return (
     <Card className="mt-4">
       <Card.Body>
@@ -51,16 +61,17 @@ const WeatherDisplay = ({ weather }) => {
           <strong>Độ ẩm:</strong> {weather.main.humidity}%
         </Card.Text>
         <Card.Text>
-          <strong>Áp suất khí quyển:</strong> {weather.main.pressure}hPa
+          <strong>Áp suất khí quyển:</strong> {weather.main.pressure} hPa
         </Card.Text>
         <Card.Text>
-          <strong>Sức gió:</strong> {weather.wind.speed} m/s
+          <strong>Sức gió:</strong> {msToKmh(weather.wind.speed)} km/h (
+          {weather.wind.speed} m/s)
         </Card.Text>
         <Card.Text>
           <strong>Hướng gió:</strong> {windDirection(weather.wind.deg)}
         </Card.Text>
         <Card.Text>
-          <strong>Tầm nhìn xa:</strong> {weather.visibility} mét
+          <strong>Tầm nhìn xa:</strong> {mToKm(weather.visibility)} km
         </Card.Text>
         <Card.Text>
           Mặt trời mọc {VietnameseDateTime(weather.sys.sunrise)}
