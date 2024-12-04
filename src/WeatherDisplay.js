@@ -68,6 +68,7 @@ const WeatherDisplay = ({ weather }) => {
         <Card.Text>
           Mặt trời lặn {VietnameseDateTime(weather.sys.sunset)}
         </Card.Text>
+        <Card.Text>Cập nhật {VietnameseDateTime(weather.dt)}</Card.Text>
       </Card.Body>
     </Card>
   );
