@@ -9,6 +9,46 @@ const WeatherDisplay = ({ weather }) => {
   // OpenWeatherMap icon URL
   const iconUrl = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
 
+  const windDirection = (degree) => {
+    const directions = [
+      "Bắc (N)",
+      "Bắc Đông Bắc (NNE)",
+      "Đông Bắc (NE)",
+      "Đông Đông Bắc (ENE)",
+      "Đông (E)",
+      "Đông Đông Nam (ESE)",
+      "Đông Nam (SE)",
+      "Nam Đông Nam (SSE)",
+      "Nam (S)",
+      "Nam Tây Nam (SSW)",
+      "Tây Nam (SW)",
+      "Tây Tây Nam (WSW)",
+      "Tây (W)",
+      "Tây Tây Bắc (WNW)",
+      "Tây Bắc (NW)",
+      "Bắc Tây Bắc (NNW)",
+    ];
+    const index = Math.round(degree / 22.5) % 16;
+    return directions[index];
+  };
+  const VietnameseDateTime = (timestamp) => {
+    // Create a new Date object from the timestamp
+    const date = new Date(timestamp * 1000);
+
+    // Use Intl.DateTimeFormat for Vietnamese locale
+    const formatter = new Intl.DateTimeFormat("vi-VN", {
+      weekday: "long", // Full weekday name
+      year: "numeric", // Full year
+      month: "long", // Full month name
+      day: "numeric", // Day of the month
+      hour: "numeric", // Hours
+      minute: "numeric", // Minutes
+      second: "numeric", // Seconds
+    });
+
+    return formatter.format(date);
+  };
+
   return (
     <Card className="mt-4">
       <Card.Body>
@@ -28,10 +68,22 @@ const WeatherDisplay = ({ weather }) => {
           <strong>Độ ẩm:</strong> {weather.main.humidity}%
         </Card.Text>
         <Card.Text>
+          <strong>Áp suất khí quyển:</strong> {weather.main.pressure}hPa
+        </Card.Text>
+        <Card.Text>
           <strong>Sức gió:</strong> {weather.wind.speed} m/s
         </Card.Text>
         <Card.Text>
+          <strong>Hướng gió:</strong> {windDirection(weather.wind.deg)}
+        </Card.Text>
+        <Card.Text>
           <strong>Tầm nhìn xa:</strong> {weather.visibility} mét
+        </Card.Text>
+        <Card.Text>
+          Mặt trời mọc {VietnameseDateTime(weather.sys.sunrise)}
+        </Card.Text>
+        <Card.Text>
+          Mặt trời lặn {VietnameseDateTime(weather.sys.sunset)}
         </Card.Text>
       </Card.Body>
     </Card>
