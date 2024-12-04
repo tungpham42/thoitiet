@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Image } from "react-bootstrap";
 import cities from "./data/cities";
+import directions from "./data/directions";
 
 const WeatherDisplay = ({ weather }) => {
   // Find the city in the cities array by the keyword matching weather.name
@@ -10,24 +11,6 @@ const WeatherDisplay = ({ weather }) => {
   const iconUrl = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
 
   const windDirection = (degree) => {
-    const directions = [
-      "Bắc (N)",
-      "Bắc Đông Bắc (NNE)",
-      "Đông Bắc (NE)",
-      "Đông Đông Bắc (ENE)",
-      "Đông (E)",
-      "Đông Đông Nam (ESE)",
-      "Đông Nam (SE)",
-      "Nam Đông Nam (SSE)",
-      "Nam (S)",
-      "Nam Tây Nam (SSW)",
-      "Tây Nam (SW)",
-      "Tây Tây Nam (WSW)",
-      "Tây (W)",
-      "Tây Tây Bắc (WNW)",
-      "Tây Bắc (NW)",
-      "Bắc Tây Bắc (NNW)",
-    ];
     const index = Math.round(degree / 22.5) % 16;
     return directions[index];
   };
